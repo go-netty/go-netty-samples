@@ -1,7 +1,7 @@
 github.com/go-netty/go-netty v0.0.0-20191206025257-9190b24c2d86 h1:h3hfxreLIUd8JPtdLtDGho7Rip2hs/8QYIkyiwghlPg=
 github.com/go-netty/go-netty v0.0.0-20191206025257-9190b24c2d86/go.mod h1:fT92PzidoA+y+wC8Wfgxf5IF/cuFbESSbQU7tMwcAqE=
-github.com/go-netty/go-netty-transport v0.0.0-20191206030459-049fcf791e6f h1:vTJ3f5aKIbzXZFgHSs9S7zyGnKzzZC1X3F+OrSsbPX8=
-github.com/go-netty/go-netty-transport v0.0.0-20191206030459-049fcf791e6f/go.mod h1:ZlLhAa80hwfisFChZcYHWqELTHLtSWuIAocRdheMRdM=
+github.com/go-netty/go-netty-transport v0.0.0-20191206034044-2c8e77eb2789 h1:JAhGmwUOptyfpf2dLyJHZeJXkGUPy+Ze97ccUB5tX+E=
+github.com/go-netty/go-netty-transport v0.0.0-20191206034044-2c8e77eb2789/go.mod h1:ZlLhAa80hwfisFChZcYHWqELTHLtSWuIAocRdheMRdM=
 github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee h1:s+21KNqlpePfkah2I+gwHF8xmJWRjooY+5248k6m4A0=
 github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee/go.mod h1:L0fX3K22YWvt/FAX9NnzrNzcI4wNYi9Yku4O0LKYflo=
 github.com/gobwas/pool v0.2.0 h1:QEmUOlnSjWtnpRGHF3SauEiOsy82Cup83Vf2LcMlnc8=
