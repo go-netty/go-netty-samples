@@ -37,7 +37,7 @@ func main() {
 	// setup child pipeline initializer.
 	bootstrap.ChildInitializer(func(channel netty.Channel) {
 		channel.Pipeline().
-			AddLast(frame.LengthFieldCodec(binary.LittleEndian, 1024, 0, 2, 0, 0)).
+			AddLast(frame.LengthFieldCodec(binary.LittleEndian, 1024, 0, 2, 0, 2)).
 			AddLast(format.TextCodec()).
 			AddLast(EchoHandler{"Server"})
 	})
@@ -45,7 +45,7 @@ func main() {
 	// setup client pipeline initializer.
 	bootstrap.ClientInitializer(func(channel netty.Channel) {
 		channel.Pipeline().
-			AddLast(frame.LengthFieldCodec(binary.LittleEndian, 1024, 0, 2, 0, 0)).
+			AddLast(frame.LengthFieldCodec(binary.LittleEndian, 1024, 0, 2, 0, 2)).
 			AddLast(format.TextCodec()).
 			AddLast(EchoHandler{"Client"})
 	})
