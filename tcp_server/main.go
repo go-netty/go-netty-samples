@@ -19,7 +19,6 @@ package main
 import (
 	"encoding/binary"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/go-netty/go-netty"
@@ -60,7 +59,9 @@ func main() {
 	bootstrap.
 		Transport(tcp.New()).
 		Listen("tcp://0.0.0.0:6565").
-		RunForever(os.Kill, os.Interrupt)
+		Action(func(bootstrap netty.Bootstrap) {
+			time.Sleep(time.Second * 3)
+		})
 }
 
 type EchoHandler struct {
