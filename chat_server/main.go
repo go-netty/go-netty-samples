@@ -73,7 +73,7 @@ func main() {
 	netty.NewBootstrap().
 		ChildInitializer(setupCodec).
 		Transport(websocket.New()).
-		Listen("ws://0.0.0.0:8080/chat", websocket.WithOptions(options)).
+		Listen("0.0.0.0:8080/chat", websocket.WithOptions(options)).
 		Action(RunAsSignal(os.Kill, os.Interrupt))
 }
 

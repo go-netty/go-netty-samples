@@ -51,14 +51,14 @@ func main() {
 
 	// connect to the server after 1 second
 	time.AfterFunc(time.Second, func() {
-		_, err := bootstrap.Connect("tcp://127.0.0.1:6565", nil)
+		_, err := bootstrap.Connect("127.0.0.1:6565", nil)
 		utils.Assert(err)
 	})
 
 	// setup bootstrap & startup server.
 	bootstrap.
 		Transport(tcp.New()).
-		Listen("tcp://0.0.0.0:6565").
+		Listen("0.0.0.0:6565").
 		Action(func(bootstrap netty.Bootstrap) {
 			time.Sleep(time.Second * 3)
 		})

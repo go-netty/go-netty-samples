@@ -37,7 +37,7 @@ func main() {
 	// connect to redis server
 	fmt.Println("connecting redis server ...")
 
-	ch, err := bootstrap.Connect("tcp://192.168.212.212:6379", nil)
+	ch, err := bootstrap.Connect("192.168.212.212:6379", nil)
 	utils.Assert(err)
 
 	select {

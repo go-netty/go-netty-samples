@@ -61,7 +61,7 @@ func main() {
 	netty.NewBootstrap().
 		ChildInitializer(setupCodec).
 		Transport(tcp.New()).
-		Listen("tcp://0.0.0.0:8080").
+		Listen("0.0.0.0:8080").
 		Action(RunAsSignal(os.Kill, os.Interrupt))
 }
 
