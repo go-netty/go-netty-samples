@@ -20,25 +20,12 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"os/signal"
 	"time"
 
 	"github.com/go-netty/go-netty"
 	"github.com/go-netty/go-netty/codec/xhttp"
 	"github.com/go-netty/go-netty/transport/tcp"
 )
-
-func RunAsSignal(signals ...os.Signal) func(netty.Bootstrap) {
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, signals...)
-
-	return func(bs netty.Bootstrap) {
-		select {
-		case <-bs.Context().Done():
-		case <-sigChan:
-		}
-	}
-}
 
 func main() {
 
@@ -62,7 +49,7 @@ func main() {
 		ChildInitializer(setupCodec).
 		Transport(tcp.New()).
 		Listen("0.0.0.0:8080").
-		Action(RunAsSignal(os.Kill, os.Interrupt))
+		Action(netty.WaitSignal(os.Kill, os.Interrupt))
 }
 
 type httpStateHandler struct{}
