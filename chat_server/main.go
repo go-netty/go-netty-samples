@@ -47,7 +47,7 @@ func main() {
 	setupCodec := func(channel netty.Channel) {
 		channel.Pipeline().
 			// Exceeding maxFrameLength will throw exception handling
-			AddLast(frame.EofCodec(1024)).
+			AddLast(frame.PacketCodec(1024)).
 			// decode to map[string]interface{}
 			AddLast(format.JsonCodec(true, false)).
 			// session recorder.
