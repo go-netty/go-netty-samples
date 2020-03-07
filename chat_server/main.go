@@ -49,7 +49,7 @@ func main() {
 			// Exceeding maxFrameLength will throw exception handling
 			AddLast(frame.PacketCodec(1024)).
 			// decode to map[string]interface{}
-			AddLast(format.JsonCodec(true, false)).
+			AddLast(format.JSONCodec(true, false)).
 			// session recorder.
 			AddLast(ManagerInst).
 			// chat handler.
@@ -75,13 +75,13 @@ func (chatHandler) HandleRead(ctx netty.InboundContext, message netty.Message) {
 	fmt.Printf("received child message from: %s, %v\n", ctx.Channel().RemoteAddr(), message)
 
 	if cmd, ok := message.(map[string]interface{}); ok {
-		cmd["id"] = ctx.Channel().Id()
+		cmd["id"] = ctx.Channel().ID()
 	}
 
 	ManagerInst.Broadcast(message)
 }
 
 func (chatHandler) HandleInactive(ctx netty.InactiveContext, ex netty.Exception) {
-	fmt.Printf("child connection loss: %s %s\n", ctx.Channel().RemoteAddr(), ex.Error())
+	fmt.Printf("child connection closed: %s %s\n", ctx.Channel().RemoteAddr(), ex.Error())
 	ctx.HandleInactive(ex)
 }

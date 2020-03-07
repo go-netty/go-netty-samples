@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/go-netty/go-netty"
+	"github.com/go-netty/go-netty-samples/redis_cli/redisgo"
 	"github.com/go-netty/go-netty/utils"
-	"github.com/rokumoe/redisgo"
 	"io"
 )
 
@@ -37,7 +37,7 @@ func (s *simpleRedisCodec) HandleRead(ctx netty.InboundContext, message netty.Me
 
 	// init decoder.
 	if nil == s.decoder {
-		s.decoder = redisgo.NewDecoder(message.(io.Reader), 1024)
+		s.decoder = redisgo.NewDecoder(message.(io.Reader), 10240)
 	}
 
 	// decode redis response.

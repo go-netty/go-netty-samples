@@ -91,7 +91,7 @@ func (s *sessionManager) BroadcastIf(message netty.Message, fn func(netty.Handle
 func (s *sessionManager) HandleActive(ctx netty.ActiveContext) {
 
 	s._mutex.Lock()
-	s._sessions[ctx.Channel().Id()] = ctx
+	s._sessions[ctx.Channel().ID()] = ctx
 	s._mutex.Unlock()
 
 	ctx.HandleActive()
@@ -99,7 +99,7 @@ func (s *sessionManager) HandleActive(ctx netty.ActiveContext) {
 
 func (s *sessionManager) HandleInactive(ctx netty.InactiveContext, ex netty.Exception) {
 	s._mutex.Lock()
-	delete(s._sessions, ctx.Channel().Id())
+	delete(s._sessions, ctx.Channel().ID())
 	s._mutex.Unlock()
 
 	ctx.HandleInactive(ex)

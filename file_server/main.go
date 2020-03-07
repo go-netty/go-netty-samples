@@ -60,7 +60,7 @@ func (*httpStateHandler) HandleActive(ctx netty.ActiveContext) {
 
 func (*httpStateHandler) HandleRead(ctx netty.InboundContext, message netty.Message) {
 	if request, ok := message.(*http.Request); ok {
-		fmt.Printf("[%d]%s: %s %s\n", ctx.Channel().Id(), ctx.Channel().RemoteAddr(), request.Method, request.URL.Path)
+		fmt.Printf("[%d]%s: %s %s\n", ctx.Channel().ID(), ctx.Channel().RemoteAddr(), request.Method, request.URL.Path)
 	}
 	ctx.HandleRead(message)
 }

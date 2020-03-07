@@ -20,7 +20,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/go-netty/go-netty"
-	"github.com/rokumoe/redisgo"
+	"github.com/go-netty/go-netty-samples/redis_cli/redisgo"
 	"os"
 	"strings"
 )
@@ -76,10 +76,16 @@ func (s *simpleRedisConsole) attachConsole(ctx netty.HandlerContext) {
 
 				// print response
 				resp := <-s.respChan
-				if resp.Null {
+
+				switch {
+				case resp.Null:
 					fmt.Println("(empty)")
-				} else {
+				case len(resp.Data) > 0:
 					fmt.Println(resp.Data)
+				case len(resp.Array) > 0:
+					for index, rsp := range resp.Array {
+						fmt.Println(fmt.Sprintf(`%d) "%s"`, index+1, rsp.Data))
+					}
 				}
 			}
 		} else {
