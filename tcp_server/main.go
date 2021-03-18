@@ -24,30 +24,29 @@ import (
 	"github.com/go-netty/go-netty"
 	"github.com/go-netty/go-netty/codec/format"
 	"github.com/go-netty/go-netty/codec/frame"
-	"github.com/go-netty/go-netty/transport/tcp"
 	"github.com/go-netty/go-netty/utils"
 )
 
 func main() {
 
-	// new bootstrap
-	var bootstrap = netty.NewBootstrap()
-
 	// setup child pipeline initializer.
-	bootstrap.ChildInitializer(func(channel netty.Channel) {
+	childInitializer := func(channel netty.Channel) {
 		channel.Pipeline().
 			AddLast(frame.LengthFieldCodec(binary.LittleEndian, 1024, 0, 2, 0, 2)).
 			AddLast(format.TextCodec()).
 			AddLast(EchoHandler{"Server"})
-	})
+	}
 
 	// setup client pipeline initializer.
-	bootstrap.ClientInitializer(func(channel netty.Channel) {
+	clientInitializer := func(channel netty.Channel) {
 		channel.Pipeline().
 			AddLast(frame.LengthFieldCodec(binary.LittleEndian, 1024, 0, 2, 0, 2)).
 			AddLast(format.TextCodec()).
 			AddLast(EchoHandler{"Client"})
-	})
+	}
+
+	// new bootstrap
+	var bootstrap = netty.NewBootstrap(netty.WithChildInitializer(childInitializer), netty.WithClientInitializer(clientInitializer))
 
 	// connect to the server after 1 second
 	time.AfterFunc(time.Second, func() {
@@ -56,12 +55,7 @@ func main() {
 	})
 
 	// setup bootstrap & startup server.
-	bootstrap.
-		Transport(tcp.New()).
-		Listen("0.0.0.0:6565").
-		Action(func(bootstrap netty.Bootstrap) {
-			time.Sleep(time.Second * 3)
-		})
+	bootstrap.Listen("0.0.0.0:6565").Sync()
 }
 
 type EchoHandler struct {
@@ -72,10 +66,12 @@ func (l EchoHandler) HandleActive(ctx netty.ActiveContext) {
 	fmt.Println(l.role, "->", "active:", ctx.Channel().RemoteAddr())
 
 	ctx.Write("Hello I'm " + l.role)
+	ctx.HandleActive()
 }
 
 func (l EchoHandler) HandleRead(ctx netty.InboundContext, message netty.Message) {
 	fmt.Println(l.role, "->", "handle read:", message)
+	ctx.HandleRead(message)
 }
 
 func (l EchoHandler) HandleInactive(ctx netty.InactiveContext, ex netty.Exception) {

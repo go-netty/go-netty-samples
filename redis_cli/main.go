@@ -18,26 +18,26 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/go-netty/go-netty"
-	"github.com/go-netty/go-netty/transport/tcp"
 	"github.com/go-netty/go-netty/utils"
 )
 
 func main() {
 
-	// new bootstrap
-	var bootstrap = netty.NewBootstrap().Transport(tcp.New())
-
 	// setup client pipeline initializer.
-	bootstrap.ClientInitializer(func(channel netty.Channel) {
+	setupCodec := func(channel netty.Channel) {
 		channel.Pipeline().
 			AddLast(&simpleRedisCodec{}, &simpleRedisConsole{})
-	})
+	}
+
+	// new bootstrap
+	var bootstrap = netty.NewBootstrap(netty.WithClientInitializer(setupCodec))
 
 	// connect to redis server
 	fmt.Println("connecting redis server ...")
 
-	ch, err := bootstrap.Connect("192.168.212.212:6379", nil)
+	ch, err := bootstrap.Connect("127.0.0.1:6379", nil)
 	utils.Assert(err)
 
 	select {

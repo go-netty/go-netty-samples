@@ -33,6 +33,7 @@ func (s *simpleRedisConsole) HandleActive(ctx netty.ActiveContext) {
 	fmt.Println("connected")
 
 	go s.attachConsole(ctx)
+	ctx.HandleActive()
 }
 
 func (s *simpleRedisConsole) HandleRead(ctx netty.InboundContext, message netty.Message) {

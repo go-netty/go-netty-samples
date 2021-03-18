@@ -19,12 +19,10 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/go-netty/go-netty"
 	"github.com/go-netty/go-netty/codec/xhttp"
-	"github.com/go-netty/go-netty/transport/tcp"
 )
 
 func main() {
@@ -45,17 +43,15 @@ func main() {
 	}
 
 	// setup bootstrap & startup server.
-	netty.NewBootstrap().
-		ChildInitializer(setupCodec).
-		Transport(tcp.New()).
-		Listen("0.0.0.0:8080").
-		Action(netty.WaitSignal(os.Kill, os.Interrupt))
+	netty.NewBootstrap(netty.WithChildInitializer(setupCodec)).
+		Listen("0.0.0.0:8080").Sync()
 }
 
 type httpStateHandler struct{}
 
 func (*httpStateHandler) HandleActive(ctx netty.ActiveContext) {
 	fmt.Printf("http client active: %s\n", ctx.Channel().RemoteAddr())
+	ctx.HandleActive()
 }
 
 func (*httpStateHandler) HandleRead(ctx netty.InboundContext, message netty.Message) {
@@ -75,4 +71,5 @@ func (*httpStateHandler) HandleWrite(ctx netty.OutboundContext, message netty.Me
 
 func (*httpStateHandler) HandleInactive(ctx netty.InactiveContext, ex netty.Exception) {
 	fmt.Printf("http client inactive: %s %v\n", ctx.Channel().RemoteAddr(), ex)
+	ctx.HandleInactive(ex)
 }

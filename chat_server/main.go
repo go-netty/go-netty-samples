@@ -19,7 +19,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/go-netty/go-netty"
@@ -57,17 +56,15 @@ func main() {
 	}
 
 	// setup bootstrap & startup server.
-	netty.NewBootstrap().
-		ChildInitializer(setupCodec).
-		Transport(websocket.New()).
-		Listen("0.0.0.0:8080/chat", websocket.WithOptions(options)).
-		Action(netty.WaitSignal(os.Kill, os.Interrupt))
+	netty.NewBootstrap(netty.WithChildInitializer(setupCodec), netty.WithTransport(websocket.New())).
+		Listen("0.0.0.0:8080/chat", websocket.WithOptions(options)).Sync()
 }
 
 type chatHandler struct{}
 
 func (chatHandler) HandleActive(ctx netty.ActiveContext) {
 	fmt.Printf("child connection from: %s\n", ctx.Channel().RemoteAddr())
+	ctx.HandleActive()
 }
 
 func (chatHandler) HandleRead(ctx netty.InboundContext, message netty.Message) {
