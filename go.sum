@@ -3,8 +3,8 @@ github.com/cheekybits/genny v1.0.0/go.mod h1:+tQajlRqAUrPI7DOSpB0XAqZYtQakVtB7wX
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/go-netty/go-netty v0.0.0-20210318115346-68000ac9a2c6 h1:HkOW3gROkKSKYFR2LGvf0LE9CYCWqAcvGm30XAcR2hI=
 github.com/go-netty/go-netty v0.0.0-20210318115346-68000ac9a2c6/go.mod h1:fT92PzidoA+y+wC8Wfgxf5IF/cuFbESSbQU7tMwcAqE=
-github.com/go-netty/go-netty-transport v0.0.0-20210318120601-473545f33375 h1:SzfIgkaruPiQ2ketbgzIRSh5svAKf3Iy+e/Bzx7Uu5o=
-github.com/go-netty/go-netty-transport v0.0.0-20210318120601-473545f33375/go.mod h1:22N1VcX/E6roRhZGv33P2VH09vKX6ISyCyALZzBdIj0=
+github.com/go-netty/go-netty-transport v0.0.0-20210910093933-5cab17b2249b h1:mwh2pra5Cr2I7xOD1v5lQEr9fb+XJ0vJysnRYfxzuOE=
+github.com/go-netty/go-netty-transport v0.0.0-20210910093933-5cab17b2249b/go.mod h1:22N1VcX/E6roRhZGv33P2VH09vKX6ISyCyALZzBdIj0=
 github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee h1:s+21KNqlpePfkah2I+gwHF8xmJWRjooY+5248k6m4A0=
 github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee/go.mod h1:L0fX3K22YWvt/FAX9NnzrNzcI4wNYi9Yku4O0LKYflo=
 github.com/gobwas/pool v0.2.0 h1:QEmUOlnSjWtnpRGHF3SauEiOsy82Cup83Vf2LcMlnc8=
