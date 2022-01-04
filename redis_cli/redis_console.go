@@ -19,10 +19,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/go-netty/go-netty"
-	"github.com/go-netty/go-netty-samples/redis_cli/redisgo"
 	"os"
 	"strings"
+
+	"github.com/go-netty/go-netty"
+	"github.com/go-netty/go-netty-samples/redis_cli/redisgo"
 )
 
 type simpleRedisConsole struct {

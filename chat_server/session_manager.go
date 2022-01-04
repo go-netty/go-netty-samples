@@ -23,18 +23,12 @@ import (
 )
 
 type Manager interface {
-	// middleware
 	netty.ActiveHandler
 	netty.InactiveHandler
-	// size of active channels.
 	Size() int
-	// find channel context with id.
 	Context(id int64) netty.HandlerContext
-	// foreach active channels.
 	ForEach(func(netty.HandlerContext) bool)
-	// broadcast message.
 	Broadcast(message netty.Message)
-	// broadcast message filter.
 	BroadcastIf(message netty.Message, fn func(netty.HandlerContext) bool)
 }
 
