@@ -19,7 +19,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/go-netty/go-netty"
 	"github.com/go-netty/go-netty-transport/websocket"
@@ -33,7 +32,6 @@ func main() {
 
 	// setup websocket params.
 	options := &websocket.Options{
-		Timeout:  time.Second * 5,
 		ServeMux: http.NewServeMux(),
 	}
 
@@ -63,6 +61,10 @@ func main() {
 type chatHandler struct{}
 
 func (chatHandler) HandleActive(ctx netty.ActiveContext) {
+	/*if wsTransport, ok := ctx.Channel().Transport().(interface{ HttpRequest() *http.Request }); ok {
+		handshakeReq := wsTransport.HttpRequest()
+		fmt.Println("websocket header: ", handshakeReq.Header)
+	}*/
 	fmt.Printf("child connection from: %s\n", ctx.Channel().RemoteAddr())
 	ctx.HandleActive()
 }
