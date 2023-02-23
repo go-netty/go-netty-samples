@@ -1,10 +1,10 @@
 module github.com/go-netty/go-netty-samples
 
-go 1.13
+go 1.16
 
 require (
-	github.com/go-netty/go-netty v0.0.0-20220104093642-a83877336e91
-	github.com/go-netty/go-netty-transport v0.0.0-20220712114429-e644815677eb
+	github.com/go-netty/go-netty v0.0.0-20230223104942-ec2ab6d5f2a8
+	github.com/go-netty/go-netty-transport v0.0.0-20230223105202-4be16d5e99e6
 )
 
 //replace github.com/go-netty/go-netty => ../go-netty
