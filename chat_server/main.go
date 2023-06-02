@@ -30,22 +30,17 @@ var ManagerInst = NewManager()
 
 func main() {
 
-	// setup websocket params.
-	options := &websocket.Options{
-		ServeMux: http.NewServeMux(),
-	}
-
 	// index page.
-	options.ServeMux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+	websocket.DefaultOptions.ServeMux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Write(indexHtml)
 	})
 
 	// child pipeline initializer.
 	setupCodec := func(channel netty.Channel) {
 		channel.Pipeline().
-			// Exceeding maxFrameLength will throw exception handling
-			AddLast(frame.PacketCodec(1024)).
-			// decode to map[string]interface{}
+			// read websocket message
+			AddLast(frame.PacketCodec(128)).
+			// decode bytes to map[string]interface{}
 			AddLast(format.JSONCodec(true, false)).
 			// session recorder.
 			AddLast(ManagerInst).
@@ -55,7 +50,7 @@ func main() {
 
 	// setup bootstrap & startup server.
 	netty.NewBootstrap(netty.WithChildInitializer(setupCodec), netty.WithTransport(websocket.New())).
-		Listen("0.0.0.0:8080/chat", websocket.WithOptions(options)).Sync()
+		Listen("0.0.0.0:8080/chat").Sync()
 }
 
 type chatHandler struct{}

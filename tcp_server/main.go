@@ -50,7 +50,7 @@ func main() {
 
 	// connect to the server after 1 second
 	time.AfterFunc(time.Second, func() {
-		_, err := bootstrap.Connect("127.0.0.1:6565", nil)
+		_, err := bootstrap.Connect("127.0.0.1:6565")
 		utils.Assert(err)
 	})
 
