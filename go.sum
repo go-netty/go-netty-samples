@@ -36,8 +36,8 @@ github.com/go-logr/logr v1.2.3/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbV
 github.com/go-logr/logr v1.2.4/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbVz/1A=
 github.com/go-netty/go-netty v1.6.4 h1:ZTGdOC0HFkd98Pq4CQG8YIfFXvWxzebVzetjtzn7rb0=
 github.com/go-netty/go-netty v1.6.4/go.mod h1:vSbL7RzFTO5bHXhxzZsAW0iStVz1qnenR90UVF6e1HA=
-github.com/go-netty/go-netty-transport v1.7.6 h1:k6Qau0xQtfGE449YK2IXIgiWAEH4Irg3d/kmHdKz0To=
-github.com/go-netty/go-netty-transport v1.7.6/go.mod h1:p0WDLHOTZ0DgrazomHLuk44bO44wlYAa4cdmuCQb39I=
+github.com/go-netty/go-netty-transport v1.7.7 h1:/FL8uTVdcQs1PafiJwRfwEwNCXURS9P9nhmp/wVpcks=
+github.com/go-netty/go-netty-transport v1.7.7/go.mod h1:p0WDLHOTZ0DgrazomHLuk44bO44wlYAa4cdmuCQb39I=
 github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0/go.mod h1:fyg7847qk6SyHyPtNmDHnmrv/HOrqktSC+C9fM+CJOE=
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572/go.mod h1:9Pwr4B2jHnOSGXyyzV8ROjYa2ojvAY6HCGYYfMoC3Ls=
 github.com/gobwas/httphead v0.1.0 h1:exrUm0f4YX0L7EBwZHuCF4GDp8aJfVeBrlLQrs6NqWU=
