@@ -56,11 +56,16 @@ func main() {
 type chatHandler struct{}
 
 func (chatHandler) HandleActive(ctx netty.ActiveContext) {
-	/*if wsTransport, ok := ctx.Channel().Transport().(interface{ HttpRequest() *http.Request }); ok {
-		handshakeReq := wsTransport.HttpRequest()
-		fmt.Println("websocket header: ", handshakeReq.Header)
-	}*/
-	fmt.Printf("child connection from: %s\n", ctx.Channel().RemoteAddr())
+	type wsTransport interface {
+		Route() string
+		Header() http.Header
+	}
+
+	if wst, ok := ctx.Channel().Transport().(wsTransport); ok {
+		fmt.Printf("child connection from: %s, route: %s, Websocket-Key: %s, User-Agent: %s\n",
+			ctx.Channel().RemoteAddr(), wst.Route(), wst.Header().Get("Sec-Websocket-Key"), wst.Header().Get("User-Agent"))
+	}
+
 	ctx.HandleActive()
 }
 
