@@ -19,7 +19,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/go-netty/go-netty"
 	"github.com/go-netty/go-netty/codec/xhttp"
@@ -59,14 +58,6 @@ func (*httpStateHandler) HandleRead(ctx netty.InboundContext, message netty.Mess
 		fmt.Printf("[%d]%s: %s %s\n", ctx.Channel().ID(), ctx.Channel().RemoteAddr(), request.Method, request.URL.Path)
 	}
 	ctx.HandleRead(message)
-}
-
-func (*httpStateHandler) HandleWrite(ctx netty.OutboundContext, message netty.Message) {
-	if responseWriter, ok := message.(http.ResponseWriter); ok {
-		// set response header.
-		responseWriter.Header().Add("x-time", time.Now().String())
-	}
-	ctx.HandleWrite(message)
 }
 
 func (*httpStateHandler) HandleInactive(ctx netty.InactiveContext, ex netty.Exception) {
